@@ -167,9 +167,9 @@ grid(Monitor *m) {
 		unsigned int cx = m->wx + (i / rows) * cw;
 		unsigned int cy = m->wy + (i % rows) * ch;
 		/* adjust height/width of last row/column's windows */
-		int ah = ((i + 1) % rows == 0) ? m->wh - ch * rows : 0;
-		unsigned int aw = (i >= rows * (cols - 1)) ? m->ww - cw * cols : 0;
-		animateclient(c, cx, cy, cw - 2 * c->bw + aw, ch - 2 * c->bw + ah, framecount, 0);
+		int ah = ((i + 1) % rows == 0) ? m->wh - ch * rows - m->gappx : 0;
+		unsigned int aw = (i >= rows * (cols - 1)) ? m->ww - cw * cols - m->gappx : 0;
+		animateclient(c, cx + m->gappx, cy + m->gappx, cw - 2 * c->bw + aw - m->gappx, ch - 2 * c->bw + ah - m->gappx, framecount, 0);
 		i++;
 	}
 }
